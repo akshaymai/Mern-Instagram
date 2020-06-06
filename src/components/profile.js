@@ -12,7 +12,6 @@ const Profile = (props) => {
          }}>
        
          <div>
-
          <img 
          src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" 
          style={{borderRadius:"80px",height:"160px",width:"160px"}}/>

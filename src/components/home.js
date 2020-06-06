@@ -9,7 +9,7 @@ const Home = (props) => {
          <div className="card-image">
             <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
          </div>  
-         <div class="card-content">
+         <div className="card-content">
              
   <i className=" material-icons " style={{color:'red'}}>favorite</i>
            <h6>akshay maity</h6>
@@ -23,7 +23,7 @@ const Home = (props) => {
          <div className="card-image">
             <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
          </div>  
-         <div class="card-content">
+         <div className="card-content">
              
   <i className=" material-icons " style={{color:'red'}}>favorite</i>
            <h6>akshay maity</h6>
@@ -39,7 +39,7 @@ const Home = (props) => {
          <div className="card-image">
             <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
          </div>  
-         <div class="card-content">
+         <div className="card-content">
              
   <i className=" material-icons " style={{color:'red'}}>favorite</i>
            <h6>akshay maity</h6>

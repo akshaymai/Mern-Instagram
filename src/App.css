@@ -34,3 +34,9 @@
 .item{
   width: 30%;
 }
+
+#toast-container{
+  top: 30px !important;
+  right: 20px !important;
+  left: auto !important;
+}
