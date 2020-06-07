@@ -1,56 +1,120 @@
-import React, { Component } from 'react';
-
+import React, { useContext,useEffect,useState} from 'react';
+import {Usercontext} from '../App'
 
 const Home = (props) => {
+    
+   const [data,setData]=useState([])
+   const {state,dispatch}=useContext(Usercontext)
+useEffect(()=>{
+  
+   fetch('/api/getallpost',{
+      headers:{
+      'Authorization':localStorage.getItem('jwt') 
+      }
+   }).then((res)=>res.json())
+   .then((reg)=>{
+   
+     setData(reg.data)
+   }).catch((err)=>{
+      console.log(err)
+   })
+
+},[])
+
+
+const likeData=(id)=>{
+
+   fetch('/api/like',{
+      method:'put',
+      headers:{
+         'Content-Type':'application/json',
+         'Authorization':localStorage.getItem('jwt') 
+      },
+      body:JSON.stringify({
+         postId:id
+      })
+   }).then((res)=>res.json())
+   .then((result)=>{
+      const newdata=data.map((item)=>{
+         if(item._id == result._id){
+            return result
+         }else{
+            return item
+         }
+        
+      })
+        setData(newdata)
+
+   }).catch((err)=>{
+      console.log(err)
+   })
+}
+const unlikeData=(id)=>{
+
+   fetch('/api/unlike',{
+      method:'put',
+      headers:{
+         'Content-Type':'application/json',
+         'Authorization':localStorage.getItem('jwt') 
+      },
+      body:JSON.stringify({
+         postId:id
+      })
+   }).then((res)=>res.json())
+   .then((result)=>{
+
+    const newdata=data.map((item)=>{
+       if(item._id == result._id){
+          return result
+       }else{
+          return item
+       }
+      
+    })
+      setData(newdata)
+   }).catch((err)=>{
+      console.log(err)
+   })
+}
+
+
+
+
+
+
     return (
  <div className="home">
-     <div className="card home-card">
-         <h5>akshay</h5>
-         <div className="card-image">
-            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
-         </div>  
-         <div className="card-content">
-             
-  <i className=" material-icons " style={{color:'red'}}>favorite</i>
-           <h6>akshay maity</h6>
-           <h1>This is my post</h1>
-           <input type="text"  placeholder="enter comment"/>
-        </div>
-           
-     </div>
-     <div className="card home-card">
-         <h5>akshay</h5>
-         <div className="card-image">
-            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
-         </div>  
-         <div className="card-content">
-             
-  <i className=" material-icons " style={{color:'red'}}>favorite</i>
-           <h6>akshay maity</h6>
-           <h1>This is my post</h1>
-           <input type="text"  placeholder="enter comment"/>
+    {data.map((item)=>{
+
+  return(
+<div className="card home-card" key={item._id}>
+    <h5>{item.postedBy.name}</h5>
+<div className="card-image">
+   <img src={item.photo}/>
+</div>  
+<div className="card-content">
+    
+<i className=" material-icons " style={{color:'red'}}>favorite</i>
+ {item.likes.includes(state._id)
+ ? 
+<i className="material-icons" onClick={()=>unlikeData(item._id)}>thumb_down</i>
+ :
+ <i className="material-icons"  onClick={()=>likeData(item._id)}>thumb_up</i>
+ }
 
 
-        </div>
-           
-     </div>
-     <div className="card home-card">
-         <h5>akshay</h5>
-         <div className="card-image">
-            <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"/>
-         </div>  
-         <div className="card-content">
-             
-  <i className=" material-icons " style={{color:'red'}}>favorite</i>
-           <h6>akshay maity</h6>
-           <h1>This is my post</h1>
-           <input type="text"  placeholder="enter comment"/>
+  <h6>{item.likes.length} Likes</h6>
+  <h6>{item.title}</h6>
+  <p>{item.body}</p>
+  <input type="text"  placeholder="enter comment"/>
+</div>
+  
+</div>
+
+  )
 
 
-        </div>
-           
-     </div>
-      
+    })}
  </div>
 )
 }

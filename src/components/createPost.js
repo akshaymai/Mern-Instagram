@@ -76,8 +76,7 @@ useEffect(()=>{
    
     return (
     <div>
-        <div className="card input-field"
-         style={{
+        <div className="card input-field" style={{
            margin:"30px auto",
            maxWidth:"500px",
            padding:"20px",
