@@ -4,7 +4,7 @@ import M from 'materialize-css'
 import {Usercontext} from '../App'
 
 const Singin = (props) => {
-const {state,dispatch}=useContext(Usercontext)
+const {dispatch}=useContext(Usercontext)
 
  const history=useHistory()
  const [email,setEmail]=useState()
@@ -18,6 +18,7 @@ const {state,dispatch}=useContext(Usercontext)
     fetch('/api/login',{
 
         method:'post',
+        
         headers:{
             'Content-Type':'application/json'
         },

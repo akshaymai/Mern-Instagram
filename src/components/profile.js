@@ -8,20 +8,23 @@ import '../App.css'
 const Profile = (props) => {
    
    const [user,Setuser]=useState([])
-   const {state,dispatch}=useContext(Usercontext);
+
+   const {state}=useContext(Usercontext);
+
+
    useEffect(()=>{
     
     fetch('/api/getpostbyme',{
         headers:{
             'Authorization':localStorage.getItem('jwt')
-        }
-    
+        } 
     }).then((data)=>data.json())
     .then((res)=>{
-        console.log('res',res)
-        Setuser(res.data)
+        Setuser(res.mypost)
     })
    },[])
+
+console.log(user.length)
 
     return (
     <div style={{maxWidth:"550px" ,margin:"auto"}}>
@@ -39,16 +42,21 @@ const Profile = (props) => {
          </div> 
          <div>   
         <h4>{state ? state.name : "Loading" }</h4>
-         <div style={{justifyContent:"space-around",display:"flex",width:"108%"}}>
-             <h6>20 post</h6>
-             <h6>20 post</h6>
-             <h6>20 post</h6>
+        <h4>{state ? state.email : "Loading" }</h4>
+ 
+                  <div style={{justifyContent:"space-around",display:"flex",width:"108%"}}>
+        <h6>{user.length} Posts</h6>
+             <h6> </h6>
+        <h6>{state ? state.followers.length :"0"} followers</h6>
+        <h6>{state ? state.following.length :"0"} following</h6>
+
              </div>
              </div>
          </div>  
     <div className="gallery">
     
        {user.map((item)=>{
+          
            return(
 <img  key={item._id} className="item" src={item.photo} alt={Math.random(2*7)}/> 
 

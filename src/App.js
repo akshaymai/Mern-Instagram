@@ -6,6 +6,7 @@ import Profile from './components/profile'
 import Singin from './components/singin'
 import Createpost from './components/createPost'
 import Singup from './components/singup'
+import Profileuser from './components/userProfile'
 import {BrowserRouter,Route,Switch,useHistory} from 'react-router-dom'
 import {initialState,reducer} from '../src/reducers/userReducer'
 
@@ -14,7 +15,7 @@ export const Usercontext=createContext()
 
 const Routing=()=>{
 const history=useHistory()
-const {state,dispatch}=useContext(Usercontext)
+const {dispatch}=useContext(Usercontext)
 useEffect(()=>{
 const user=JSON.parse(localStorage.getItem("user"))
 if(user){
@@ -35,14 +36,15 @@ return(
             <Route path="/singin">
             <Singin/>
             </Route>
-            <Route path="/profile">
+            <Route exact path="/profile">
             <Profile/>
             </Route>
-            <Route path="/profile">
-            <Profile/>
-            </Route>
+
             <Route path="/createpost">
             <Createpost/>
+            </Route>
+            <Route path="/profile/:userId">
+            <Profileuser/>
             </Route>
 </Switch>
 )

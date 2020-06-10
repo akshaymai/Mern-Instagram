@@ -68,10 +68,6 @@ useEffect(()=>{
      console.log(err)
    })
 
-
-   
-   
-
   }
    
     return (
